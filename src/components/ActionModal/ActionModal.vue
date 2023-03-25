@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import FontAwesomeIcon from '@/plugins/fa.config'
-import Divider from '@/components/Divider/index.vue'
+import Divider from '@/components/Divider/Divider.vue'
 
 </script>
 
