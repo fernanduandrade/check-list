@@ -1,14 +1,14 @@
 @import '../../styles/variables';
 
 .modal-wrapper {
-    position: relative;
+    position: fixed;
     width: 180px;
     height: 259px;
     border-radius: 1px;
     background-color: $background-white;
     z-index: 999;
-    right: 300px;
     backdrop-filter: initial;
+    right: 30%;
 
     box-shadow:
   0.3px 0px 4.8px rgba(0, 0, 0, 0.055),
