@@ -1,10 +1,14 @@
 @import '../../styles/variables';
 
 .modal-wrapper {
-    width: 250px;
-    height: 240px;
+    position: relative;
+    width: 180px;
+    height: 259px;
     border-radius: 1px;
     background-color: $background-white;
+    z-index: 999;
+    right: 300px;
+    backdrop-filter: initial;
 
     box-shadow:
   0.3px 0px 4.8px rgba(0, 0, 0, 0.055),
@@ -86,10 +90,9 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
+
         &.action {
-            padding-top: 15px;
-            padding-bottom: 15px;
-            height: 25px;
+            padding-top: 15px 0px 15px 0px;
 
             &:hover {
                 background-color: #F5F5F5;

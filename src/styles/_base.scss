@@ -35,9 +35,8 @@ body {
     display: flex;
     flex-direction: column;
     border-top: $background-dark 8px solid;
-    box-shadow:
-  0.3px 0px 4.8px rgba(0, 0, 0, 0.055),
-  2px 0px 38px rgba(0, 0, 0, 0.11)
+    box-shadow: 0.3px 0px 4.8px rgba(0, 0, 0, 0.055), 2px 0px 38px rgba(0, 0, 0, 0.11);
+    z-index: -1;
 ;
 }
 

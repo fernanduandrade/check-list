@@ -1,8 +1,12 @@
 <script setup lang="ts">
+import { defineAsyncComponent, ref } from 'vue'
 import FontAwesomeIcon from './plugins/fa.config';
 import Divider from './components/Divider/index.vue'
 import Checkbox from './components/Checkbox/index.vue'
-import ActionModal from './components/ActionModal/index.vue'
+const  LoadActionModal = defineAsyncComponent(() => import('@/components/ActionModal/index.vue'))
+
+const show1 = ref(false)
+const show2 = ref(false)
 </script>
 
 <template>
@@ -30,15 +34,16 @@ import ActionModal from './components/ActionModal/index.vue'
             <div class="check-list__section task__actions--icon">
               <font-awesome-icon icon="fa-chevron-down"/>
             </div>
-            <div class="check-list__section task__actions--icon">
+            <div class="check-list__section task__actions--icon" @click="show1 = !show1">
               <font-awesome-icon icon="fa-bars" />
             </div>
+            <load-action-modal v-show="show1" />
           </div>
         </div>
 
         <div class="check-list__section task">
           <div class="check-list__section task__checkbox">
-            <Checkbox />
+            <checkbox />
           </div>
           <div class="check-list__section task__title">
             <span>
@@ -52,13 +57,14 @@ import ActionModal from './components/ActionModal/index.vue'
             <div class="check-list__section task__actions--icon">
               <font-awesome-icon icon="fa-chevron-down"/>
             </div>
-            <div class="check-list__section task__actions--icon">
+            <div class="check-list__section task__actions--icon" @click="show2 = !show2">
               <font-awesome-icon icon="fa-bars" />
             </div>
+            <load-action-modal v-show="show2" />
           </div>
         </div>
     </section>
-    <Divider />
+    <divider />
     <footer class="check-list__footer">
       <div class="check-list__footer visibility">
         <i><font-awesome-icon icon="fa-eye" /></i>
