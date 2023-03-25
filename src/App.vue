@@ -47,11 +47,15 @@ const completedTodo = ref(0)
         :key="todo.id"
       >
       <div class="check-list__section task__checkbox">
-            <Checkbox />
+            <Checkbox
+              @click="completedTodo = completedTodo += 1"
+              v-model="todo.completed"
+            />
           </div>
 
           <div class="check-list__section task__title">
-            <span>{{ todo.title ? todo.title : 'Title' }}</span> 
+            <!-- <input @dblclick="" v-model="todo.title"/> -->
+            <label for="">{{ todo.title ? todo.title : 'Title' }}</label> 
           </div>
           <div class="check-list__section task__actions">
             <div class="check-list__section task__actions--icon">

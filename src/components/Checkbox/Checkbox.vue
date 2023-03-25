@@ -25,8 +25,8 @@
       default: ''
     },
     modelValue: {
-      type: [String, Number, Object],
-      default: ''
+      type: [Boolean],
+      default: false
     },
     flag: {
       type: String,
