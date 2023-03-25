@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineAsyncComponent, ref } from 'vue'
+import { defineAsyncComponent, ref, computed } from 'vue'
 import FontAwesomeIcon from './plugins/fa.config';
 import Divider from './components/Divider/Divider.vue'
 import Checkbox from './components/Checkbox/Checkbox.vue'
@@ -22,6 +22,8 @@ function generateId(): string {
      return Math.random().toString(36);
 }
 
+const hideCompletedTodo = ref(false)
+
 const addTodo = () => todoList.value.push({
     completed: false,
     id:  generateId(),
@@ -31,7 +33,8 @@ const addTodo = () => todoList.value.push({
     actionOpened: false
   })
 
-const completedTodo = ref(0)
+
+const completedTodo = computed(() => todoList.value.filter(todo => todo.completed).length)
 </script>
 
 <template>
@@ -70,11 +73,12 @@ const completedTodo = ref(0)
             <load-action-modal v-show="todo.actionOpened" />
           </div>
       </div>
+
     </section>
     <divider />
     <footer class="check-list__footer">
-      <div class="check-list__footer visibility">
-        <i><font-awesome-icon icon="fa-eye" /></i>
+      <div class="check-list__footer visibility" @click="hideCompletedTodo = !hideCompletedTodo">
+        <i><font-awesome-icon :icon="hideCompletedTodo ? 'fa-eye-slash' : 'fa-eye'" /></i>
         &nbsp Completado {{ completedTodo }} de {{ todoList.length }}
       </div>
       <div class="check-list__footer add-task" @click="addTodo">
