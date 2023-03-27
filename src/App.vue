@@ -1,20 +1,11 @@
 <script setup lang="ts">
 import { defineAsyncComponent, ref, computed } from 'vue'
-import FontAwesomeIcon from './plugins/fa.config';
-import Divider from './components/Divider/Divider.vue'
-import Checkbox from './components/Checkbox/Checkbox.vue'
+import FontAwesomeIcon from '@/plugins/fa.config';
+import Divider from '@/components/Divider/Divider.vue'
+import Checkbox from '@/components/Checkbox/Checkbox.vue'
+import { Todo } from '@/utils/types';
 const  LoadActionModal = defineAsyncComponent(() => import('@/components/ActionModal/ActionModal.vue'))
 
-type Priority = 'orange' | 'yellow' |'deeppink' | 'black'
-
-interface Todo {
-  id: string,
-  description?: string,
-  completed: boolean,
-  title: string,
-  priority: Priority,
-  actionOpened: boolean
-}
 
 const todoList = ref<Todo[]>([])
 
@@ -58,7 +49,7 @@ const completedTodo = computed(() => todoList.value.filter(todo => todo.complete
 
           <div class="check-list__section task__title">
             <!-- <input @dblclick="" v-model="todo.title"/> -->
-            <label for="">{{ todo.title ? todo.title : 'Title' }}</label> 
+            <label for="">{{ todo.title ? todo.title : 'Pular da ponte' }}</label> 
           </div>
           <div class="check-list__section task__actions">
             <div class="check-list__section task__actions--icon">
@@ -70,7 +61,7 @@ const completedTodo = computed(() => todoList.value.filter(todo => todo.complete
             <div class="check-list__section task__actions--icon" @click="todo.actionOpened = !todo.actionOpened">
               <font-awesome-icon icon="fa-bars" />
             </div>
-            <load-action-modal v-show="todo.actionOpened" />
+            <load-action-modal flag="teste" :todo="todo" v-show="todo.actionOpened" />
           </div>
       </div>
 

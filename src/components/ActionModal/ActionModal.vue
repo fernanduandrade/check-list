@@ -1,20 +1,35 @@
 <script setup lang="ts">
+
+import { defineProps, PropType } from 'vue'
 import FontAwesomeIcon from '@/plugins/fa.config'
 import Divider from '@/components/Divider/Divider.vue'
+import { Todo } from '@/utils/types';
+
+const props = defineProps({
+    flag: {
+        type: String,
+        required: true,
+        default: 'black'
+    },
+    todo: {
+        type: Object as PropType<Todo>,
+        required: true,
+    }
+})
 
 </script>
 
 <template>
     <main class="modal-wrapper">
         <div class="modal-wrapper__header-1">
-            <span title="teste" class="modal-wrapper__header-1 task__title">Task: sadihasiodhasoidhwquiehquihquiwehwquidhuisadhasiu</span>
+            <span title="teste" class="modal-wrapper__header-1 task__title">Task: Pular da ponte</span>
             <div class="modal-wrapper__header-1 task__icon-close">
                 <font-awesome-icon icon="fa-xmark"/>
             </div>
         </div>
         <Divider />
         <div class="modal-wrapper__header-2">
-            <span class="modal-wrapper__header-2 flags__title">Priority</span>
+            <span class="modal-wrapper__header-2 flags__title">Prioridade</span>
             <div class="modal-wrapper__header-2 flags__icons">
                 <div class="modal-wrapper__header-2 flags__icons--icon">
                     <font-awesome-icon icon="fa-flag" width="12" height="12" color="deeppink" />
@@ -33,25 +48,25 @@ import Divider from '@/components/Divider/Divider.vue'
         <Divider />
         <div class="modal-wrapper__header-3">
             <div class="modal-wrapper__header-3 action">
-                <span class="modal-wrapper__header-3 action--option">Move up</span> 
+                <span class="modal-wrapper__header-3 action--option">Mover para cima</span> 
             </div>
             <div class="modal-wrapper__header-3 action">
-                <span class="modal-wrapper__header-3 action--option">Move up</span>    
-            </div>
-        </div>
-        <Divider />
-        <div class="modal-wrapper__header-3">
-            <div class="modal-wrapper__header-3 action">
-                <span class="modal-wrapper__header-3 action--option">Show description</span> 
-            </div>
-            <div class="modal-wrapper__header-3 action">
-                <span class="modal-wrapper__header-3 action--option">Duplicate</span>    
+                <span class="modal-wrapper__header-3 action--option">Mover para baixo</span>    
             </div>
         </div>
         <Divider />
         <div class="modal-wrapper__header-3">
             <div class="modal-wrapper__header-3 action">
-                <span class="modal-wrapper__header-3 action--option delete">Delete task</span> 
+                <span class="modal-wrapper__header-3 action--option">Mostrar descrição</span> 
+            </div>
+            <div class="modal-wrapper__header-3 action">
+                <span class="modal-wrapper__header-3 action--option">Duplicar</span>    
+            </div>
+        </div>
+        <Divider />
+        <div class="modal-wrapper__header-3">
+            <div class="modal-wrapper__header-3 action">
+                <span class="modal-wrapper__header-3 action--option delete">Deletar tarefa</span> 
             </div>
         </div>
     </main>
