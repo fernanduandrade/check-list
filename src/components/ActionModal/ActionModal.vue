@@ -17,13 +17,19 @@ const props = defineProps({
     }
 })
 
+const emit = defineEmits(['closeModal'])
+  
+const closeModalHandler = (e: Event) => {
+emit('closeModal', false)
+}
+
 </script>
 
 <template>
     <main class="modal-wrapper">
         <div class="modal-wrapper__header-1">
-            <span title="teste" class="modal-wrapper__header-1 task__title">Task: Pular da ponte</span>
-            <div class="modal-wrapper__header-1 task__icon-close">
+            <span :title="todo.title" class="modal-wrapper__header-1 task__title">Task: {{ todo.title }}</span>
+            <div class="modal-wrapper__header-1 task__icon-close" @click="closeModalHandler">
                 <font-awesome-icon icon="fa-xmark"/>
             </div>
         </div>

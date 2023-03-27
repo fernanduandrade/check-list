@@ -26,6 +26,8 @@ const addTodo = () => todoList.value.push({
 
 
 const completedTodo = computed(() => todoList.value.filter(todo => todo.completed).length)
+
+const closeActionModalEvent = (event: boolean, todo: Todo) => todo.actionOpened = event
 </script>
 
 <template>
@@ -61,7 +63,7 @@ const completedTodo = computed(() => todoList.value.filter(todo => todo.complete
             <div class="check-list__section task__actions--icon" @click="todo.actionOpened = !todo.actionOpened">
               <font-awesome-icon icon="fa-bars" />
             </div>
-            <load-action-modal flag="teste" :todo="todo" v-show="todo.actionOpened" />
+            <load-action-modal flag="teste" :todo="todo" v-show="todo.actionOpened" @closeModal="closeActionModalEvent($event, todo)"/>
           </div>
       </div>
 
