@@ -3,7 +3,7 @@ import { defineAsyncComponent, ref, computed } from 'vue'
 import FontAwesomeIcon from '@/plugins/fa.config';
 import Divider from '@/components/Divider/Divider.vue'
 import Checkbox from '@/components/Checkbox/Checkbox.vue'
-import { Todo } from '@/utils/types';
+import { Priority, Todo } from '@/utils/types';
 const  LoadActionModal = defineAsyncComponent(() => import('@/components/ActionModal/ActionModal.vue'))
 
 
@@ -28,6 +28,9 @@ const addTodo = () => todoList.value.push({
 const completedTodo = computed(() => todoList.value.filter(todo => todo.completed).length)
 
 const closeActionModalEvent = (event: boolean, todo: Todo) => todo.actionOpened = event
+const changeFlagPriorityEvent = (event: Priority, todo: Todo) => {
+  todo.priority = event
+}
 </script>
 
 <template>
@@ -46,6 +49,7 @@ const closeActionModalEvent = (event: boolean, todo: Todo) => todo.actionOpened 
             <Checkbox
               @click="completedTodo = completedTodo += 1"
               v-model="todo.completed"
+              :priotity="todo.priority"
             />
           </div>
 
@@ -63,7 +67,13 @@ const closeActionModalEvent = (event: boolean, todo: Todo) => todo.actionOpened 
             <div class="check-list__section task__actions--icon" @click="todo.actionOpened = !todo.actionOpened">
               <font-awesome-icon icon="fa-bars" />
             </div>
-            <load-action-modal flag="teste" :todo="todo" v-show="todo.actionOpened" @closeModal="closeActionModalEvent($event, todo)"/>
+            <load-action-modal
+              :todo="todo"
+              @mouseleave="todo.actionOpened = false"
+              @closeModal="closeActionModalEvent($event, todo)"
+              @changeFlagColor="changeFlagPriorityEvent($event as Priority, todo)"
+              v-show="todo.actionOpened"
+            />
           </div>
       </div>
 

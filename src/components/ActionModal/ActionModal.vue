@@ -17,12 +17,16 @@ const props = defineProps({
     }
 })
 
-const emit = defineEmits(['closeModal'])
+const emit = defineEmits<{
+  (event: 'closeModal', value: boolean): void
+  (event: 'changeFlagColor', value: string): void
+}>()
   
-const closeModalHandler = (e: Event) => {
-emit('closeModal', false)
+const closeModalHandler = (e: Event) => emit('closeModal', false)
+const changeFlagPriority = (value: string) => {
+    console.log(value)
+    emit('changeFlagColor', value)
 }
-
 </script>
 
 <template>
@@ -37,17 +41,17 @@ emit('closeModal', false)
         <div class="modal-wrapper__header-2">
             <span class="modal-wrapper__header-2 flags__title">Prioridade</span>
             <div class="modal-wrapper__header-2 flags__icons">
-                <div class="modal-wrapper__header-2 flags__icons--icon">
+                <div class="modal-wrapper__header-2 flags__icons--icon" @click="changeFlagPriority('deeppink')">
                     <font-awesome-icon icon="fa-flag" width="12" height="12" color="deeppink" />
                 </div>
-                <div class="modal-wrapper__header-2 flags__icons--icon">
-                    <font-awesome-icon icon="fa-flag" width="12" height="12" color="orange" />
+                <div class="modal-wrapper__header-2 flags__icons--icon" @click="changeFlagPriority('orange')">
+                    <font-awesome-icon icon="fa-flag" width="12" height="12" color="orange"  />
                 </div>
-                <div class="modal-wrapper__header-2 flags__icons--icon">
-                    <font-awesome-icon icon="fa-flag" width="12" height="12" color="yellow" />
+                <div class="modal-wrapper__header-2 flags__icons--icon" @click="changeFlagPriority('yellow')">
+                    <font-awesome-icon icon="fa-flag" width="12" height="12" color="yellow"  />
                 </div>
-                <div class="modal-wrapper__header-2 flags__icons--icon">
-                    <font-awesome-icon icon="fa-flag" width="12" height="12" color="black" />
+                <div class="modal-wrapper__header-2 flags__icons--icon" @click="changeFlagPriority('black')">
+                    <font-awesome-icon icon="fa-flag" width="12" height="12" color="black"  />
                 </div>
             </div>
         </div>  
