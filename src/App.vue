@@ -47,7 +47,13 @@ function moveTodo(array: Todo[], index: number, direction: string) {
 }
 
 function duplicateTodo(todo: Todo) {
-  todoList.value.push({...todo, actionOpened: false})
+  todoList.value.push({...todo, actionOpened: false, id: generateId()})
+}
+
+function deleteTodo(todo: Todo) {
+  const indexOf = todoList.value.indexOf(todo)
+  console.log(indexOf)
+  todoList.value.splice(indexOf, 1)
 }
 
 </script>
@@ -102,6 +108,7 @@ function duplicateTodo(todo: Todo) {
               @changeFlagColor="changeFlagPriorityEvent($event as Priority, todo)"
               @movePosition="moveTodo(todoList, index, $event)"
               @duplicate="duplicateTodo(todo)"
+              @delete="deleteTodo(todo)"
               v-show="todo.actionOpened"
             />
           </div>

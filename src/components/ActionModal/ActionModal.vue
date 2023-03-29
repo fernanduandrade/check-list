@@ -34,6 +34,7 @@ const emit = defineEmits<{
   (event: 'changeFlagColor', value: string): void
   (event: 'movePosition', value: string): void,
   (event: 'duplicate'): void
+  (event: 'delete'): void
 }>()
   
 const closeModalHandler = (e: Event) => emit('closeModal', false)
@@ -97,7 +98,7 @@ const changeTodoPosition = (position: string) => {
         </div>
         <Divider />
         <div class="modal-wrapper__header-3">
-            <div class="modal-wrapper__header-3 action">
+            <div class="modal-wrapper__header-3 action" @click="$emit('delete')">
                 <span class="modal-wrapper__header-3 action--option delete">Deletar tarefa</span> 
             </div>
         </div>
