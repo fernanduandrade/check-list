@@ -20,7 +20,7 @@ const addTodo = () => todoList.value.push({
     id:  generateId(),
     description: '',
     priority: 'black',
-    title: '',
+    title: `teste ${generateId()}`,
     actionOpened: false
   })
 
@@ -31,6 +31,21 @@ const closeActionModalEvent = (event: boolean, todo: Todo) => todo.actionOpened 
 const changeFlagPriorityEvent = (event: Priority, todo: Todo) => {
   todo.priority = event
 }
+
+function moveTodo(array: Todo[], index: number, direction: string) {
+  if (direction === 'up') {
+    // Move the element up by one position
+    if (index > 0) {
+      [array[index - 1], array[index]] = [array[index], array[index - 1]];
+    }
+  } else if (direction === 'down') {
+    // Move the element down by one position
+    if (index < array.length - 1) {
+      [array[index], array[index + 1]] = [array[index + 1], array[index]];
+    }
+  }
+}
+
 </script>
 
 <template>
@@ -42,7 +57,7 @@ const changeFlagPriorityEvent = (event: Priority, todo: Todo) => {
     <section class="check-list__section">
       <div
         class="check-list__section task"
-        v-for="todo in todoList"
+        v-for="(todo, index) in todoList"
         :key="todo.id"
       >
       <div class="check-list__section task__checkbox">
@@ -54,14 +69,20 @@ const changeFlagPriorityEvent = (event: Priority, todo: Todo) => {
           </div>
 
           <div class="check-list__section task__title">
-            <!-- <input @dblclick="" v-model="todo.title"/> -->
-            <label for="">{{ todo.title ? todo.title : 'Pular da ponte' }}</label> 
+            <label for="">{{ todo.title ? todo.title : `Pular da ponte ${index}` }}</label> 
           </div>
           <div class="check-list__section task__actions">
-            <div class="check-list__section task__actions--icon">
+            <div
+              :class="`check-list__section task__actions--icon ${(index === 0 || todoList.length === 1 ? 'disabled': '')}`"
+              @click="moveTodo(todoList, index, 'up')"
+            >
               <font-awesome-icon icon="fa-chevron-up" />
             </div>
-            <div class="check-list__section task__actions--icon">
+            <div
+              :class="`check-list__section task__actions--icon ${(index === todoList.length - 1|| todoList.length === 1 ? 'disabled': '')}`"
+              @click="moveTodo(todoList, index, 'down')"
+            >
+              
               <font-awesome-icon icon="fa-chevron-down"/>
             </div>
             <div class="check-list__section task__actions--icon" @click="todo.actionOpened = !todo.actionOpened">
@@ -69,9 +90,13 @@ const changeFlagPriorityEvent = (event: Priority, todo: Todo) => {
             </div>
             <load-action-modal
               :todo="todo"
+              :lastPosition="index === todoList.length - 1"
+              :firstPosition="index === 0"
+              :oneElement="todoList.length === 1"
               @mouseleave="todo.actionOpened = false"
               @closeModal="closeActionModalEvent($event, todo)"
               @changeFlagColor="changeFlagPriorityEvent($event as Priority, todo)"
+              @movePosition="moveTodo(todoList, index, $event)"
               v-show="todo.actionOpened"
             />
           </div>

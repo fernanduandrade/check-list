@@ -89,6 +89,12 @@ body {
                         background-color: #EBEBEB;
                         cursor: pointer;
                     }
+
+                    &.disabled {
+                        color: #858585;
+                        background-color: #FFFFFF;
+                        user-select: none;
+                    }
                 }
             }
         }

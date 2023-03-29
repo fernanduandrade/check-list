@@ -14,18 +14,33 @@ const props = defineProps({
     todo: {
         type: Object as PropType<Todo>,
         required: true,
+    },
+    lastPosition: {
+        type: Boolean,
+        required: true
+    },
+    firstPosition: {
+        type: Boolean,
+        required: true
+    },
+    oneElement: {
+        type: Boolean,
+        required: true
     }
 })
 
 const emit = defineEmits<{
   (event: 'closeModal', value: boolean): void
   (event: 'changeFlagColor', value: string): void
+  (event: 'movePosition', value: string): void
 }>()
   
 const closeModalHandler = (e: Event) => emit('closeModal', false)
 const changeFlagPriority = (value: string) => {
-    console.log(value)
     emit('changeFlagColor', value)
+}
+const changeTodoPosition = (position: string) => {
+    emit('movePosition', position)
 }
 </script>
 
@@ -57,10 +72,16 @@ const changeFlagPriority = (value: string) => {
         </div>  
         <Divider />
         <div class="modal-wrapper__header-3">
-            <div class="modal-wrapper__header-3 action">
+            <div
+                :class="`modal-wrapper__header-3 action${(firstPosition || oneElement ? '--disabled': '')}`"
+                @click="changeTodoPosition('up')"
+            >
                 <span class="modal-wrapper__header-3 action--option">Mover para cima</span> 
             </div>
-            <div class="modal-wrapper__header-3 action">
+            <div
+                :class="`modal-wrapper__header-3 action${(lastPosition || oneElement ? '--disabled': '')}`"
+                @click="changeTodoPosition('down')"
+            >
                 <span class="modal-wrapper__header-3 action--option">Mover para baixo</span>    
             </div>
         </div>

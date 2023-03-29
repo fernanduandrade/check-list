@@ -93,8 +93,9 @@
 
         &.action {
             padding-top: 15px 0px 15px 0px;
-
+            
             &:hover {
+                cursor: pointer;
                 background-color: #F5F5F5;
             }
         
@@ -107,6 +108,12 @@
                 &.delete {
                     color: red;
                 }
+            }
+
+            &--disabled {
+               color: #858585;
+               cursor: auto;
+               user-select: none;
             }
         }
     }
