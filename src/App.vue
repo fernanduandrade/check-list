@@ -20,8 +20,9 @@ const addTodo = () => todoList.value.push({
     id:  generateId(),
     description: '',
     priority: 'black',
-    title: `teste ${generateId()}`,
-    actionOpened: false
+    title: ``,
+    actionOpened: false,
+    editing: false,
   })
 
 
@@ -52,8 +53,12 @@ function duplicateTodo(todo: Todo) {
 
 function deleteTodo(todo: Todo) {
   const indexOf = todoList.value.indexOf(todo)
-  console.log(indexOf)
   todoList.value.splice(indexOf, 1)
+}
+
+
+function changeTodoTitle(todo: Todo) {
+  todo.editing = true
 }
 
 </script>
@@ -78,9 +83,19 @@ function deleteTodo(todo: Todo) {
             />
           </div>
 
-          <div class="check-list__section task__title">
-            <label for="">{{ todo.title ? todo.title : `Pular da ponte ${index}` }}</label> 
+          <div v-if="todo.editing" class="check-list__section task__input">
+            <input
+              class="check-list__section task__input--editing"
+              v-if="todo.editing"
+              @keyup.enter="todo.editing = false"
+              type="text"
+              v-model="todo.title"
+            > 
           </div>
+          <div v-else class="check-list__section task__title">
+            <label :class="`check-list__section task__title${(!todo.title ? '--empty' : '')}`" @dblclick="changeTodoTitle(todo)" for="">{{ todo.title ? todo.title : `Título` }}</label> 
+          </div>
+
           <div class="check-list__section task__actions">
             <div
               :class="`check-list__section task__actions--icon ${(index === 0 || todoList.length === 1 ? 'disabled': '')}`"

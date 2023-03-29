@@ -67,10 +67,25 @@ body {
             padding: 8px 32px;
             gap: 8px;
 
+            &__input {
+                font-size: 16px;
+                line-height: 23px;
+                width: 580px;
+
+                &--editing {
+                    outline-color: transparent;
+                    border: none;
+                }
+            }
+
             &__title {
                 font-size: 16px;
                 line-height: 23px;
                 width: 580px;
+
+                &--empty {
+                    color: #858585;
+                }
             }
 
             &__actions {

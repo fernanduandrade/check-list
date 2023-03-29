@@ -6,5 +6,6 @@ export interface Todo {
   completed: boolean,
   title: string,
   priority: Priority,
-  actionOpened: boolean
+  actionOpened: boolean,
+  editing: boolean
 }
