@@ -46,6 +46,10 @@ function moveTodo(array: Todo[], index: number, direction: string) {
   }
 }
 
+function duplicateTodo(todo: Todo) {
+  todoList.value.push({...todo, actionOpened: false})
+}
+
 </script>
 
 <template>
@@ -97,6 +101,7 @@ function moveTodo(array: Todo[], index: number, direction: string) {
               @closeModal="closeActionModalEvent($event, todo)"
               @changeFlagColor="changeFlagPriorityEvent($event as Priority, todo)"
               @movePosition="moveTodo(todoList, index, $event)"
+              @duplicate="duplicateTodo(todo)"
               v-show="todo.actionOpened"
             />
           </div>

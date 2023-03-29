@@ -32,7 +32,8 @@ const props = defineProps({
 const emit = defineEmits<{
   (event: 'closeModal', value: boolean): void
   (event: 'changeFlagColor', value: string): void
-  (event: 'movePosition', value: string): void
+  (event: 'movePosition', value: string): void,
+  (event: 'duplicate'): void
 }>()
   
 const closeModalHandler = (e: Event) => emit('closeModal', false)
@@ -90,7 +91,7 @@ const changeTodoPosition = (position: string) => {
             <div class="modal-wrapper__header-3 action">
                 <span class="modal-wrapper__header-3 action--option">Mostrar descrição</span> 
             </div>
-            <div class="modal-wrapper__header-3 action">
+            <div class="modal-wrapper__header-3 action" @click="$emit('duplicate')">
                 <span class="modal-wrapper__header-3 action--option">Duplicar</span>    
             </div>
         </div>
