@@ -3,7 +3,7 @@
       <input
         type="checkbox"
         :disabled="disabled"
-        :checked="checked"
+        :checked="modelValue"
         @click="clickHandler"
       >
       <span class="checkmark"/>
@@ -13,10 +13,6 @@
   <script setup lang="ts">
   import { defineProps, defineEmits } from 'vue'
   const props = defineProps({
-    checked: {
-      type: Boolean,
-      default: false
-    },
     disabled: {
       type: Boolean,
       default: false

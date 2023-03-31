@@ -61,6 +61,15 @@ function changeTodoTitle(todo: Todo) {
   todo.editing = true
 }
 
+const toggleCompleteTodos = () => {
+  hideCompletedTodo.value = !hideCompletedTodo.value
+}
+
+const filteredTodos = computed(
+  () => !hideCompletedTodo.value
+    ? todoList.value
+    : todoList.value.filter(todo => !todo.completed))
+
 </script>
 
 <template>
@@ -72,7 +81,7 @@ function changeTodoTitle(todo: Todo) {
     <section class="check-list__section">
       <div
         class="check-list__section task"
-        v-for="(todo, index) in todoList"
+        v-for="(todo, index) in filteredTodos"
         :key="todo.id"
       >
       <div class="check-list__section task__checkbox">
@@ -132,7 +141,7 @@ function changeTodoTitle(todo: Todo) {
     </section>
     <divider />
     <footer class="check-list__footer">
-      <div class="check-list__footer visibility" @click="hideCompletedTodo = !hideCompletedTodo">
+      <div class="check-list__footer visibility" @click="toggleCompleteTodos">
         <i><font-awesome-icon :icon="hideCompletedTodo ? 'fa-eye-slash' : 'fa-eye'" /></i>
         &nbsp Completado {{ completedTodo }} de {{ todoList.length }}
       </div>
