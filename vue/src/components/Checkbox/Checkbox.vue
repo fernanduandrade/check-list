@@ -1,5 +1,5 @@
 <template>
-  <label class="at-input-checkbox__wrapper">
+  <label class="checkbox__wrapper">
     <input
       type="checkbox"
       :disabled="disabled"
@@ -33,7 +33,7 @@ const clickHandler = (e: Event) => {
 <style scoped lang="scss">
 @import '../../styles/variables';
 
-.at-input-checkbox {
+.checkbox {
   &__wrapper {
     display: block;
     position: relative;
@@ -67,16 +67,16 @@ const clickHandler = (e: Event) => {
   }
 }
 
-.at-input-checkbox__wrapper:hover input ~ .checkmark {
+.checkbox__wrapper:hover input ~ .checkmark {
   border: 1px solid rgb(0, 140, 255);
 }
 
-.at-input-checkbox__wrapper input:checked ~ .checkmark {
+.checkbox__wrapper input:checked ~ .checkmark {
   background-color: v-bind(priority);
   border: none;
 }
 
-.at-input-checkbox__wrapper input:disabled ~ .checkmark {
+.checkbox__wrapper input:disabled ~ .checkmark {
   background-color: $background-white;
   border: 1px solid $grey-light;
 }
@@ -87,11 +87,11 @@ const clickHandler = (e: Event) => {
   display: none;
 }
 
-.at-input-checkbox__wrapper input:checked ~ .checkmark:after {
+.checkbox__wrapper input:checked ~ .checkmark:after {
   display: block;
 }
 
-.at-input-checkbox__wrapper .checkmark:after {
+.checkbox__wrapper .checkmark:after {
   left: 5.6px;
   top: 2.6px;
   width: 5px;
