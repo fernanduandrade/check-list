@@ -1,119 +1,124 @@
-@import '../../../styles/variables';
+@import '@/styles/variables';
 
-.modal-wrapper {
-    position: fixed;
-    width: 180px;
-    height: 259px;
-    border-radius: 1px;
-    background-color: $background-white;
-    z-index: 999;
-    backdrop-filter: initial;
-    right: 30%;
+.modal {
 
-    box-shadow:
-  0.3px 0px 4.8px rgba(0, 0, 0, 0.055),
-  2px 0px 38px rgba(0, 0, 0, 0.11);
+    &__wrapper {
+        position: fixed;
+        width: 180px;
+        height: 259px;
+        border-radius: 1px;
+        background-color: $background-white;
+        z-index: 999;
+        backdrop-filter: initial;
+        right: 30%;
 
-    &__header-1{
+        box-shadow:
+            0.3px 0px 4.8px rgba(0, 0, 0, 0.055),
+            2px 0px 38px rgba(0, 0, 0, 0.11);
+    }
+
+    &__intro {
         display: flex;
         justify-content: space-around;
         align-items: center;
         padding: 0px 4px 0px 4px;
         height: 30px;
 
-        &.task {
-            &__title {
-                display: block;
-                font-size: 10px;
-                font-weight: 700;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-                flex: 0 0 90%;
-                margin-top: 12px;
-            }
-    
-            &__icon-close {
-                flex: 0 0 10%;
-                cursor: pointer;
-                border-radius: 3px;
-                width: 13px;
-                height: 13px;
+        &__title {
+            display: block;
+            font-size: 10px;
+            font-weight: 700;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            flex: 0 0 90%;
+        }
+
+        &__icon--close {
+            cursor: pointer;
+            border-radius: 3px;
+            width: 13px;
+            height: 13px;
+            
+            
+            &--close {
                 font-weight: 300;
+                
+            }
+            
+
+            &:hover {
+                background-color: #F5F5F5;
+            }
+        }
+    }
+
+    &__section-flags {
+        display: flex;
+        justify-content: space-around;
+        flex-direction: column;
+
+        &__title {
+            padding: 7px 10px 0px 10px;
+            font-size: 8px;
+            font-weight: 700;
+        }
+
+        &__icons {
+            align-items: center;
+            justify-content: stretch;
+            display: flex;
+            padding: 0px 10px 0px 10px;
+            flex-direction: row;
+            gap: 32px;
+            height: 40px;
+
+            &--icon {
+
+                display: flex;
+                align-items: center;
+                height: 16px;
+                width: 16px;
 
                 &:hover {
+                    cursor: pointer;
                     background-color: #F5F5F5;
                 }
             }
         }
     }
 
-    &__header-2 {
-        display: flex;
-        justify-content: space-around;
-        flex-direction: column;
-
-        &.flags {
-            
-            &__title {
-                padding: 7px 10px 0px 10px;
-                font-size: 8px;
-                font-weight: 700;
-            }
-            &__icons {
-                align-items: center;
-                justify-content: stretch;
-                display: flex;
-                padding: 0px 10px 0px 10px;
-                flex-direction: row;
-                gap: 32px;
-                height: 40px;
-
-                &--icon {
-
-                    display: flex;
-                    align-items: center;
-                    height: 16px;
-                    width: 16px;
-                    &:hover {
-                        cursor: pointer;
-                        background-color: #F5F5F5;
-                    }
-                }
-            }
-            
-        }
-    }
-
-    &__header-3 {
-
+    &__section-actions {
         display: flex;
         flex-direction: column;
         justify-content: center;
-
+        
         &.action {
             padding-top: 15px 0px 15px 0px;
-            
+
             &:hover {
                 cursor: pointer;
                 background-color: #F5F5F5;
             }
-        
-            &--option {
+
+            &__option {
                 font-size: 8px;
                 font-weight: 700;
                 padding: 10px;
 
 
-                &.delete {
+                &--delete {
                     color: red;
+                    font-size: 8px;
+                    font-weight: 700;
+                    padding: 10px;
                 }
             }
 
             &--disabled {
-               color: #858585;
-               cursor: auto;
-               user-select: none;
+                color: #858585;
+                cursor: auto;
+                user-select: none;
             }
         }
     }

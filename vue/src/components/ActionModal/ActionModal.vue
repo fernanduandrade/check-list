@@ -6,21 +6,21 @@ import Divider from '@/components/Divider/Divider.vue'
 import { Priority, Direction, Todo } from '@/common/types'
 
 interface ActionModalProps {
-  flag: Priority,
-  todo: Todo,
-  lastPosition: boolean,
-  firstPosition: boolean,
-  oneElement: boolean
+    flag: Priority,
+    todo: Todo,
+    lastPosition: boolean,
+    firstPosition: boolean,
+    oneElement: boolean
 }
 
-const props = withDefaults(defineProps<ActionModalProps>(), {flag: 'black'}) 
+const props = withDefaults(defineProps<ActionModalProps>(), { flag: 'black' })
 
 const emit = defineEmits<{
-  (event: 'closeModal', value: boolean): void
-  (event: 'changeFlagPriority', value: Priority): void
-  (event: 'movePosition', value: Direction): void,
-  (event: 'duplicate'): void
-  (event: 'delete'): void
+    (event: 'closeModal', value: boolean): void
+    (event: 'changeFlagPriority', value: Priority): void
+    (event: 'movePosition', value: Direction): void,
+    (event: 'duplicate'): void
+    (event: 'delete'): void
 }>()
 
 const changeFlagPriority = (value: Priority) => emit('changeFlagPriority', value)
@@ -29,61 +29,57 @@ const changeTodoPosition = (position: Direction) => emit('movePosition', positio
 </script>
 
 <template>
-    <main class="modal-wrapper">
-        <div class="modal-wrapper__header-1">
-            <span :title="todo.title" class="modal-wrapper__header-1 task__title">Task: {{ todo.title }}</span>
-            <div class="modal-wrapper__header-1 task__icon-close" @click="$emit('closeModal', false)">
-                <font-awesome-icon icon="fa-xmark"/>
+    <main class="modal__wrapper">
+        <div class="modal__intro">
+            <span :title="todo.title" class="modal__intro__title">Task: {{ todo.title }}</span>
+            <div class="modal__intro__icon--close" @click="$emit('closeModal', false)">
+                <font-awesome-icon icon="fa-xmark" />
             </div>
         </div>
         <Divider />
-        <div class="modal-wrapper__header-2">
-            <span class="modal-wrapper__header-2 flags__title">Prioridade</span>
-            <div class="modal-wrapper__header-2 flags__icons">
-                <div class="modal-wrapper__header-2 flags__icons--icon" @click="changeFlagPriority('deeppink')">
+        <section class="modal__section-flags">
+            <span class="modal__section-flags__title">Prioridade</span>
+            <div class="modal__section-flags__icons">
+                <div class="modal__section-flags__icons--icon" @click="changeFlagPriority('deeppink')">
                     <font-awesome-icon icon="fa-flag" width="12" height="12" color="deeppink" />
                 </div>
-                <div class="modal-wrapper__header-2 flags__icons--icon" @click="changeFlagPriority('orange')">
-                    <font-awesome-icon icon="fa-flag" width="12" height="12" color="orange"  />
+                <div class="modal__section-flags__icons--icon" @click="changeFlagPriority('orange')">
+                    <font-awesome-icon icon="fa-flag" width="12" height="12" color="orange" />
                 </div>
-                <div class="modal-wrapper__header-2 flags__icons--icon" @click="changeFlagPriority('yellow')">
-                    <font-awesome-icon icon="fa-flag" width="12" height="12" color="yellow"  />
+                <div class="modal__section-flags__icons--icon" @click="changeFlagPriority('yellow')">
+                    <font-awesome-icon icon="fa-flag" width="12" height="12" color="yellow" />
                 </div>
-                <div class="modal-wrapper__header-2 flags__icons--icon" @click="changeFlagPriority('black')">
-                    <font-awesome-icon icon="fa-flag" width="12" height="12" color="black"  />
+                <div class="modal__section-flags__icons--icon" @click="changeFlagPriority('black')">
+                    <font-awesome-icon icon="fa-flag" width="12" height="12" color="black" />
                 </div>
             </div>
-        </div>  
+        </section>
         <Divider />
-        <div class="modal-wrapper__header-3">
-            <div
-                :class="`modal-wrapper__header-3 action${(firstPosition || oneElement ? '--disabled': '')}`"
-                @click="changeTodoPosition('up')"
-            >
-                <span class="modal-wrapper__header-3 action--option">Mover para cima</span> 
+        <section class="modal__section-actions">
+            <div :class="`modal__section-actions action${(firstPosition || oneElement ? '--disabled' : '')}`"
+                @click="changeTodoPosition('up')">
+                <span class="modal__section-actions action__option">Mover para cima</span>
             </div>
-            <div
-                :class="`modal-wrapper__header-3 action${(lastPosition || oneElement ? '--disabled': '')}`"
-                @click="changeTodoPosition('down')"
-            >
-                <span class="modal-wrapper__header-3 action--option">Mover para baixo</span>    
+            <div :class="`modal__section-actions action${(lastPosition || oneElement ? '--disabled' : '')}`"
+                @click="changeTodoPosition('down')">
+                <span class="modal__section-actions action__option">Mover para baixo</span>
             </div>
-        </div>
+        </section>
         <Divider />
-        <div class="modal-wrapper__header-3">
-            <div class="modal-wrapper__header-3 action">
-                <span class="modal-wrapper__header-3 action--option">Mostrar descrição</span> 
+        <section class="modal__section-actions">
+            <div class="modal__section-actions action">
+                <span class="modal__section-actions action__option">Mostrar descrição</span>
             </div>
-            <div class="modal-wrapper__header-3 action" @click="$emit('duplicate')">
-                <span class="modal-wrapper__header-3 action--option">Duplicar</span>    
+            <div class="modal__section-actions action" @click="$emit('duplicate')">
+                <span class="modal__section-actions action__option">Duplicar</span>
             </div>
-        </div>
+        </section>
         <Divider />
-        <div class="modal-wrapper__header-3">
-            <div class="modal-wrapper__header-3 action" @click="$emit('delete')">
-                <span class="modal-wrapper__header-3 action--option delete">Deletar tarefa</span> 
+        <section class="modal__section-actions">
+            <div class="modal__section-actions action" @click="$emit('delete')">
+                <span class="modal__section-actions action__option--delete">Deletar tarefa</span>
             </div>
-        </div>
+        </section>
     </main>
 </template>
 
