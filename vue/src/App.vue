@@ -6,3 +6,5 @@ import TodoView from '@/views/todos/index.vue'
 <template>
     <TodoView />
 </template>
+
+<style lang="scss" src="./styles/_base.scss"></style>

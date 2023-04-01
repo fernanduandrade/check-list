@@ -104,4 +104,4 @@ const filteredTodos = computed(
   </main>
 </template>
 
-<style lang="scss" src="@/styles/_base.scss"></style>
+<style lang="scss" src="./styles.scss"></style>
