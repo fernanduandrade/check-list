@@ -12,7 +12,13 @@
   
 <script setup lang="ts">
 import { defineProps, defineEmits } from 'vue'
-import { CheckboxProps, Direction } from '@/common/types'
+import { Priority } from '@/common/types'
+
+interface CheckboxProps {
+  disabled?: boolean,
+  modelValue?: boolean,
+  priority: Priority
+}
 
 const props = defineProps<CheckboxProps>()
 

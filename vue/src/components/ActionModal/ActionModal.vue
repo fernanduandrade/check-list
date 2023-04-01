@@ -3,11 +3,17 @@
 import { defineProps, withDefaults } from 'vue'
 import FontAwesomeIcon from '@/plugins/fa.config'
 import Divider from '@/components/Divider/Divider.vue'
-import { Priority, Direction, ActionModalProps } from '@/common/types'
+import { Priority, Direction, Todo } from '@/common/types'
 
-const props = withDefaults(defineProps<ActionModalProps>(), {
-    flag: 'black'
-}) 
+interface ActionModalProps {
+  flag: Priority,
+  todo: Todo,
+  lastPosition: boolean,
+  firstPosition: boolean,
+  oneElement: boolean
+}
+
+const props = withDefaults(defineProps<ActionModalProps>(), {flag: 'black'}) 
 
 const emit = defineEmits<{
   (event: 'closeModal', value: boolean): void
