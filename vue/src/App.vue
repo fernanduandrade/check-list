@@ -3,7 +3,8 @@ import { defineAsyncComponent, ref, computed } from 'vue'
 import FontAwesomeIcon from '@/plugins/fa.config';
 import Divider from '@/components/Divider/Divider.vue'
 import Checkbox from '@/components/Checkbox/Checkbox.vue'
-import { Priority, Todo } from '@/utils/types';
+import { Direction, Priority, Todo } from '@/common/types';
+import  {moveArrayElementIndex, generateId } from '@/common/logic'
 const  LoadActionModal = defineAsyncComponent(() => import('@/components/ActionModal/ActionModal.vue'))
 
 
@@ -31,19 +32,7 @@ const changeFlagPriorityEvent = (event: Priority, todo: Todo) => {
   todo.priority = event
 }
 
-function moveTodo(array: Todo[], index: number, direction: string) {
-  if (direction === 'up') {
-    // Move the element up by one position
-    if (index > 0) {
-      [array[index - 1], array[index]] = [array[index], array[index - 1]];
-    }
-  } else if (direction === 'down') {
-    // Move the element down by one position
-    if (index < array.length - 1) {
-      [array[index], array[index + 1]] = [array[index + 1], array[index]];
-    }
-  }
-}
+
 
 function duplicateTodo(todo: Todo) {
   todoList.value.push({...todo, actionOpened: false, id: generateId()})
@@ -106,13 +95,13 @@ const filteredTodos = computed(
           <div class="check-list__section task__actions">
             <div
               :class="`check-list__section task__actions--icon ${(index === 0 || todoList.length === 1 ? 'disabled': '')}`"
-              @click="moveTodo(todoList, index, 'up')"
+              @click="moveArrayElementIndex(todoList, index, 'up')"
             >
               <font-awesome-icon icon="fa-chevron-up" />
             </div>
             <div
               :class="`check-list__section task__actions--icon ${(index === todoList.length - 1|| todoList.length === 1 ? 'disabled': '')}`"
-              @click="moveTodo(todoList, index, 'down')"
+              @click="moveArrayElementIndex(todoList, index, 'down')"
             >
               
               <font-awesome-icon icon="fa-chevron-down"/>
@@ -128,7 +117,7 @@ const filteredTodos = computed(
               @mouseleave="todo.actionOpened = false"
               @closeModal="closeActionModalEvent($event, todo)"
               @changeFlagColor="changeFlagPriorityEvent($event as Priority, todo)"
-              @movePosition="moveTodo(todoList, index, $event)"
+              @movePosition="moveArrayElementIndex(todoList, index, $event)"
               @duplicate="duplicateTodo(todo)"
               @delete="deleteTodo(todo)"
               v-show="todo.actionOpened"

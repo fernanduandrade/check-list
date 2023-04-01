@@ -3,7 +3,7 @@
 import { defineProps, PropType } from 'vue'
 import FontAwesomeIcon from '@/plugins/fa.config'
 import Divider from '@/components/Divider/Divider.vue'
-import { Todo } from '@/utils/types';
+import { Todo, Direction } from '@/common/types'
 
 const props = defineProps({
     flag: {
@@ -32,7 +32,7 @@ const props = defineProps({
 const emit = defineEmits<{
   (event: 'closeModal', value: boolean): void
   (event: 'changeFlagColor', value: string): void
-  (event: 'movePosition', value: string): void,
+  (event: 'movePosition', value: Direction): void,
   (event: 'duplicate'): void
   (event: 'delete'): void
 }>()
@@ -41,9 +41,8 @@ const closeModalHandler = (e: Event) => emit('closeModal', false)
 const changeFlagPriority = (value: string) => {
     emit('changeFlagColor', value)
 }
-const changeTodoPosition = (position: string) => {
-    emit('movePosition', position)
-}
+const changeTodoPosition = (position: Direction) => emit('movePosition', position)
+
 </script>
 
 <template>

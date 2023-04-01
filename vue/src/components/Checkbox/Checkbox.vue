@@ -12,6 +12,7 @@
   
   <script setup lang="ts">
   import { defineProps, defineEmits } from 'vue'
+  import { Direction } from '@/common/types'
   const props = defineProps({
     disabled: {
       type: Boolean,
@@ -34,7 +35,7 @@
   const emit = defineEmits(['update:modelValue'])
   
   const clickHandler = (e: Event) => {
-    const element: HTMLInputElement = e.target as HTMLInputElement
+    const element = e.target as HTMLInputElement
     emit('update:modelValue', element.checked)
   }
   </script>

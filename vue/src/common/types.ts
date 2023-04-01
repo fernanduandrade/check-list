@@ -9,3 +9,5 @@ export interface Todo {
   actionOpened: boolean,
   editing: boolean
 }
+
+export type Direction = 'up' | 'down'
