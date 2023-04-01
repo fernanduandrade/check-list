@@ -3,14 +3,11 @@ import { defineAsyncComponent, ref, computed } from 'vue'
 import FontAwesomeIcon from '@/plugins/fa.config';
 import Divider from '@/components/Divider/Divider.vue'
 import Checkbox from '@/components/Checkbox/Checkbox.vue'
-import { Direction, Priority, Todo } from '@/common/types';
+import { Priority, Todo } from '@/common/types';
 import  {moveArrayElementIndex, generateId } from '@/common/logic'
 const  LoadActionModal = defineAsyncComponent(() => import('@/components/ActionModal/ActionModal.vue'))
 
-
 const todoList = ref<Todo[]>([])
-
-
 
 const hideCompletedTodo = ref(false)
 
@@ -28,29 +25,17 @@ const addTodo = () => todoList.value.push({
 const completedTodo = computed(() => todoList.value.filter(todo => todo.completed).length)
 
 const closeActionModalEvent = (event: boolean, todo: Todo) => todo.actionOpened = event
-const changeFlagPriorityEvent = (event: Priority, todo: Todo) => {
-  todo.priority = event
-}
+const changeFlagPriorityEvent = (event: Priority, todo: Todo) => todo.priority = event
+const duplicateTodo =(todo: Todo) => todoList.value.push({...todo, actionOpened: false, id: generateId()})
 
-
-
-function duplicateTodo(todo: Todo) {
-  todoList.value.push({...todo, actionOpened: false, id: generateId()})
-}
-
-function deleteTodo(todo: Todo) {
+const deleteTodo = (todo: Todo) => {
   const indexOf = todoList.value.indexOf(todo)
   todoList.value.splice(indexOf, 1)
 }
 
+const changeTodoTitle = (todo: Todo) => todo.editing = true
 
-function changeTodoTitle(todo: Todo) {
-  todo.editing = true
-}
-
-const toggleCompleteTodos = () => {
-  hideCompletedTodo.value = !hideCompletedTodo.value
-}
+const toggleCompleteTodos = () => hideCompletedTodo.value = !hideCompletedTodo.value
 
 const filteredTodos = computed(
   () => !hideCompletedTodo.value
@@ -75,7 +60,7 @@ const filteredTodos = computed(
             <Checkbox
               @click="completedTodo = completedTodo += 1"
               v-model="todo.completed"
-              :priotity="todo.priority"
+              :priority="todo.priority"
             />
           </div>
 
@@ -116,7 +101,7 @@ const filteredTodos = computed(
               :oneElement="todoList.length === 1"
               @mouseleave="todo.actionOpened = false"
               @closeModal="closeActionModalEvent($event, todo)"
-              @changeFlagColor="changeFlagPriorityEvent($event as Priority, todo)"
+              @changeFlagPriority="changeFlagPriorityEvent($event as Priority, todo)"
               @movePosition="moveArrayElementIndex(todoList, index, $event)"
               @duplicate="duplicateTodo(todo)"
               @delete="deleteTodo(todo)"

@@ -1,44 +1,28 @@
 <template>
-    <label class="at-input-checkbox__wrapper">
-      <input
-        type="checkbox"
-        :disabled="disabled"
-        :checked="modelValue"
-        @click="clickHandler"
-      >
-      <span class="checkmark"/>
-    </label>
-  </template>
+  <label class="at-input-checkbox__wrapper">
+    <input
+      type="checkbox"
+      :disabled="disabled"
+      :checked="modelValue"
+      @click="clickHandler"
+    >
+    <span class="checkmark"/>
+  </label>
+</template>
   
-  <script setup lang="ts">
-  import { defineProps, defineEmits } from 'vue'
-  import { Direction } from '@/common/types'
-  const props = defineProps({
-    disabled: {
-      type: Boolean,
-      default: false
-    },
-    id: {
-      type: String,
-      default: ''
-    },
-    modelValue: {
-      type: [Boolean],
-      default: false
-    },
-    priotity: {
-      type: String,
-      default: 'black'
-    }
-  })
-  
-  const emit = defineEmits(['update:modelValue'])
-  
-  const clickHandler = (e: Event) => {
-    const element = e.target as HTMLInputElement
-    emit('update:modelValue', element.checked)
-  }
-  </script>
+<script setup lang="ts">
+import { defineProps, defineEmits } from 'vue'
+import { CheckboxProps, Direction } from '@/common/types'
+
+const props = defineProps<CheckboxProps>()
+
+const emit = defineEmits(['update:modelValue'])
+
+const clickHandler = (e: Event) => {
+  const element = e.target as HTMLInputElement
+  emit('update:modelValue', element.checked)
+}
+</script>
   
 <style scoped lang="scss">
 @import '../../styles/variables';
@@ -62,7 +46,6 @@
   }
 }
 
-/* Checkbox customizada */
 .checkmark {
   position: absolute;
   top: 0;
@@ -70,7 +53,7 @@
   height: 16px;
   width: 16px;
   background-color: $background-white;
-  border: 1px solid v-bind(priotity);
+  border: 1px solid v-bind(priority);
   border-radius: 4px;
 
   &:hover {
@@ -83,7 +66,7 @@
 }
 
 .at-input-checkbox__wrapper input:checked ~ .checkmark {
-  background-color: v-bind(priotity);
+  background-color: v-bind(priority);
   border: none;
 }
 

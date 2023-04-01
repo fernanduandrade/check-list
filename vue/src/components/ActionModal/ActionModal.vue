@@ -1,46 +1,23 @@
 <script setup lang="ts">
 
-import { defineProps, PropType } from 'vue'
+import { defineProps, withDefaults } from 'vue'
 import FontAwesomeIcon from '@/plugins/fa.config'
 import Divider from '@/components/Divider/Divider.vue'
-import { Todo, Direction } from '@/common/types'
+import { Priority, Direction, ActionModalProps } from '@/common/types'
 
-const props = defineProps({
-    flag: {
-        type: String,
-        required: true,
-        default: 'black'
-    },
-    todo: {
-        type: Object as PropType<Todo>,
-        required: true,
-    },
-    lastPosition: {
-        type: Boolean,
-        required: true
-    },
-    firstPosition: {
-        type: Boolean,
-        required: true
-    },
-    oneElement: {
-        type: Boolean,
-        required: true
-    }
-})
+const props = withDefaults(defineProps<ActionModalProps>(), {
+    flag: 'black'
+}) 
 
 const emit = defineEmits<{
   (event: 'closeModal', value: boolean): void
-  (event: 'changeFlagColor', value: string): void
+  (event: 'changeFlagPriority', value: Priority): void
   (event: 'movePosition', value: Direction): void,
   (event: 'duplicate'): void
   (event: 'delete'): void
 }>()
-  
-const closeModalHandler = (e: Event) => emit('closeModal', false)
-const changeFlagPriority = (value: string) => {
-    emit('changeFlagColor', value)
-}
+
+const changeFlagPriority = (value: Priority) => emit('changeFlagPriority', value)
 const changeTodoPosition = (position: Direction) => emit('movePosition', position)
 
 </script>
@@ -49,7 +26,7 @@ const changeTodoPosition = (position: Direction) => emit('movePosition', positio
     <main class="modal-wrapper">
         <div class="modal-wrapper__header-1">
             <span :title="todo.title" class="modal-wrapper__header-1 task__title">Task: {{ todo.title }}</span>
-            <div class="modal-wrapper__header-1 task__icon-close" @click="closeModalHandler">
+            <div class="modal-wrapper__header-1 task__icon-close" @click="$emit('closeModal', false)">
                 <font-awesome-icon icon="fa-xmark"/>
             </div>
         </div>

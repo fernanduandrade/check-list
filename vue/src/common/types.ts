@@ -11,3 +11,17 @@ export interface Todo {
 }
 
 export type Direction = 'up' | 'down'
+
+export interface CheckboxProps {
+  disabled?: boolean,
+  modelValue?: boolean,
+  priority: Priority
+}
+
+export interface ActionModalProps {
+  flag: Priority,
+  todo: Todo,
+  lastPosition: boolean,
+  firstPosition: boolean,
+  oneElement: boolean
+}
