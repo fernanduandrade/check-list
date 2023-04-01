@@ -105,5 +105,4 @@ const changeTodoPosition = (position: string) => {
     </main>
 </template>
 
-<style lang="scss" src="./styles.scss">
-</style>
+<style lang="scss" src="./scss/styles.scss"></style>
