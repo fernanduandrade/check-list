@@ -9,9 +9,7 @@ const  LoadActionModal = defineAsyncComponent(() => import('@/components/ActionM
 
 const todoList = ref<Todo[]>([])
 
-function generateId(): string {
-     return Math.random().toString(36);
-}
+
 
 const hideCompletedTodo = ref(false)
 
