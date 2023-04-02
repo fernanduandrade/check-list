@@ -1,12 +1,29 @@
-* {
-    margin: 0;
-    padding: 0;
+:root {
+    --background-color-primary: #ebebeb;
+    --background-color-secondary: #fafafa;
+    --accent-color: #cacaca;
+    --text-primary-color: #222;
+    --element-size: 6rem;
+}
+
+/* Define styles for the root window with dark - mode preference */
+:root.dark-theme {
+    --background-color-primary: #1e1e1e;
+    --background-color-secondary: #2d2d30;
+    --accent-color: #3f3f3f;
+    --text-primary-color: #ddd;
 }
 
 *,
 *::before,
 *::after {
     box-sizing: inherit;
+}
+
+html,
+body {
+    padding: 0;
+    margin: 0;
 }
 
 html {
@@ -16,11 +33,13 @@ html {
 
 body {
     font-family: 'Inter', sans-serif;
-    font-weight: 400;
-    line-height: 1.6;
-    background-color: #F5F5F5;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    background-color: var(--background-color-secondary);
+}
+
+p,h1,h2,h3,h4,h5 {
+    color: var(--text-primary-color);
 }

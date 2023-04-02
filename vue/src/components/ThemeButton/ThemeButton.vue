@@ -1,9 +1,8 @@
 <script lang="ts" setup>
 import { ref, onMounted } from 'vue'
-import FontAwesomeIcon from '@/plugins/fa.config';
 onMounted(() => {
     const initUserTheme = getTheme() || getMediaPreference()
-    setTheme2(initUserTheme)
+    setTheme(initUserTheme)
 })
 
 const getTheme = (): Theme => localStorage.getItem('user-theme') as Theme
@@ -15,8 +14,7 @@ const getMediaPreference = (): Theme => {
 }
 type Theme = 'dark-theme' | 'light-theme'
 const userTheme = ref('light-theme')
-const setTheme = ref<Theme>()
-const setTheme2 = (theme: Theme): void => {
+const setTheme = (theme: Theme): void => {
     localStorage.setItem('user-theme', theme)
     userTheme.value = theme
     document.documentElement.className = theme
@@ -24,9 +22,9 @@ const setTheme2 = (theme: Theme): void => {
 const toggleTheme = () => {
     const activeTheme = localStorage.getItem('user-theme');
     if (activeTheme === 'dark-theme') {
-        setTheme.value = 'light-theme'
+        setTheme('light-theme')
     } else {
-        setTheme.value = 'dark-theme'
+        setTheme('dark-theme')
     }
 }
 </script>
@@ -62,13 +60,13 @@ const toggleTheme = () => {
   border-radius: var(--element-size);
   cursor: pointer;
   display: flex;
-  font-size: calc(var(--element-size) * 0.3);
-  height: calc(var(--element-size) * 0.35);
+  font-size: calc(var(--element-size) * 0.2);
+  height: calc(var(--element-size) * 0.5);
   position: relative;
-  padding: calc(var(--element-size) * 0.1);
+  padding: calc(var(--element-size) * 0.25);
   transition: background 0.5s ease;
   justify-content: space-between;
-  width: var(--element-size);
+  width: 7.5rem;
   z-index: 9999999;
 }
 
@@ -77,7 +75,7 @@ const toggleTheme = () => {
   background-color: var(--background-color-primary);
   border-radius: 50%;
   top: calc(var(--element-size) * 0.07);
-  left: calc(var(--element-size) * 0.07);
+  left: calc(var(--element-size) * 0.09);
   height: calc(var(--element-size) * 0.4);
   width: calc(var(--element-size) * 0.4);
   transform: translateX(0);

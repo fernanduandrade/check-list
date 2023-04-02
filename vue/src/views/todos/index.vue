@@ -48,7 +48,7 @@ const filteredTodos = computed(
 <template>
   <main class="container">
     <header class="check-list__header">
-      <span>Check List - TODO</span>
+      <h1>Check List - TODO</h1>
       <ThemeButton />
     </header>
     <Divider />
