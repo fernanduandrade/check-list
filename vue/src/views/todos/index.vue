@@ -51,7 +51,7 @@ const filteredTodos = computed(
       <h1>Check List - TODO</h1>
       <ThemeButton />
     </header>
-    <Divider />
+    <divider />
     <section class="check-list__section">
       <div class="check-list__section task" v-for="(todo, index) in filteredTodos" :key="todo.id">
         <div class="check-list__section task__checkbox">

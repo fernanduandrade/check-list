@@ -1,14 +1,13 @@
 @import '@/styles/variables';
 
 .modal {
-
+    z-index: 99999;
     &__wrapper {
         position: fixed;
         width: 180px;
         height: 259px;
         border-radius: 1px;
-        background-color: $background-white;
-        z-index: 999;
+        background-color: var(--background-primary-color);
         backdrop-filter: initial;
         right: 30%;
 
@@ -23,6 +22,7 @@
         align-items: center;
         padding: 0px 4px 0px 4px;
         height: 30px;
+        color: var(--text-primary-color);
 
         &__title {
             display: block;
@@ -48,7 +48,7 @@
             
 
             &:hover {
-                background-color: #F5F5F5;
+                background-color: var(--accent-color);
             }
         }
     }
@@ -60,8 +60,9 @@
 
         &__title {
             padding: 7px 10px 0px 10px;
-            font-size: 8px;
+            font-size: 10px;
             font-weight: 700;
+            color: var(--text-primary-color);
         }
 
         &__icons {
@@ -82,7 +83,7 @@
 
                 &:hover {
                     cursor: pointer;
-                    background-color: #F5F5F5;
+                    background-color: var(--accent-color);
                 }
             }
         }
@@ -98,13 +99,14 @@
 
             &:hover {
                 cursor: pointer;
-                background-color: #F5F5F5;
+                background-color: var(--accent-color);
             }
 
             &__option {
                 font-size: 8px;
                 font-weight: 700;
                 padding: 10px;
+                color: var(--text-primary-color);
 
 
                 &--delete {
@@ -116,7 +118,7 @@
             }
 
             &--disabled {
-                color: #858585;
+                color: var(--text-secondary-color);
                 cursor: auto;
                 user-select: none;
             }

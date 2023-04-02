@@ -67,7 +67,6 @@ const toggleTheme = () => {
   transition: background 0.5s ease;
   justify-content: space-between;
   width: 7.5rem;
-  z-index: 9999999;
 }
 
 .switch-toggle {

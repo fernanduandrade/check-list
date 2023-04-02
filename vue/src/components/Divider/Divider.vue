@@ -5,8 +5,8 @@
 hr {
     display: block;
     height: 1px;
-    border: 0;
-    border-top: 1px solid #F5F5F5;
+    border-top: 1px solid var(--divider-color);
     padding: 0;
+    width: 100%;
 }
 </style>
