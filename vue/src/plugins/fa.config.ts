@@ -17,7 +17,9 @@ import {
     faChevronDown,
     faBars,
     faXmark,
-    faFlag
+    faFlag,
+    faSun,
+    faMoon
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -37,7 +39,9 @@ library.add(
     faChevronDown,
     faBars,
     faXmark,
-    faFlag
+    faFlag,
+    faSun,
+    faMoon
 );
 
 

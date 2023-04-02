@@ -3,6 +3,7 @@ import { defineAsyncComponent, ref, computed } from 'vue'
 import FontAwesomeIcon from '@/plugins/fa.config';
 import Divider from '@/components/Divider/Divider.vue'
 import Checkbox from '@/components/Checkbox/Checkbox.vue'
+import ThemeButton from '@/components/ThemeButton/ThemeButton.vue'
 import { Priority, Todo } from '@/common/types';
 import { moveArrayElementIndex, generateId } from '@/common/logic'
 const LoadActionModal = defineAsyncComponent(() => import('@/components/ActionModal/ActionModal.vue'))
@@ -47,7 +48,8 @@ const filteredTodos = computed(
 <template>
   <main class="container">
     <header class="check-list__header">
-      Check List - TODO
+      <span>Check List - TODO</span>
+      <ThemeButton />
     </header>
     <Divider />
     <section class="check-list__section">
