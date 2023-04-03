@@ -13,7 +13,7 @@ const getMediaPreference = (): Theme => {
     return 'light-theme'
 }
 type Theme = 'dark-theme' | 'light-theme'
-const userTheme = ref('light-theme')
+const userTheme = ref()
 const setTheme = (theme: Theme): void => {
     localStorage.setItem('user-theme', theme)
     userTheme.value = theme

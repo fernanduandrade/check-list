@@ -56,13 +56,13 @@ const changeTodoPosition = (position: Direction) => emit('movePosition', positio
         </section>
         <Divider />
         <section class="modal__section-actions">
-            <div :class="`modal__section-actions action${(firstPosition || oneElement ? '--disabled' : '')}`"
+            <div class="modal__section-actions action"
                 @click="changeTodoPosition('up')">
-                <span class="modal__section-actions action__option">Mover para cima</span>
+                <span :class="`modal__section-actions action__option${(firstPosition || oneElement ? '--disabled' : '')}`">Mover para cima</span>
             </div>
-            <div :class="`modal__section-actions action${(lastPosition || oneElement ? '--disabled' : '')}`"
+            <div class="`modal__section-actions action"
                 @click="changeTodoPosition('down')">
-                <span class="modal__section-actions action__option">Mover para baixo</span>
+                <span :class="`modal__section-actions action__option${(lastPosition || oneElement ? '--disabled' : '')}`">Mover para baixo</span>
             </div>
         </section>
         <Divider />

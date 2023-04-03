@@ -10,6 +10,8 @@
     &:not(:root.dark-theme) {
         box-shadow: 0.3px 0px 4.8px rgba(0, 0, 0, 0.055), 2px 0px 38px rgba(0, 0, 0, 0.11);
     };
+
+    z-index: -1;
 }
 
 .check-list {
@@ -52,10 +54,13 @@
                 font-size: 16px;
                 line-height: 23px;
                 width: 580px;
+                
 
                 &--editing {
-                    outline-color: transparent;
                     border: none;
+                    outline: none;
+                    background-color: var(--background-color-secondary);
+                    color: var(--text-primary-color);
                 }
             }
 

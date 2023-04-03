@@ -1,19 +1,20 @@
 @import '@/styles/variables';
 
 .modal {
-    z-index: 99999;
     &__wrapper {
         position: fixed;
         width: 180px;
-        height: 259px;
+        height: 282px;
         border-radius: 1px;
-        background-color: var(--background-primary-color);
+        background-color: var(--background-color-secondary);
         backdrop-filter: initial;
         right: 30%;
 
         box-shadow:
             0.3px 0px 4.8px rgba(0, 0, 0, 0.055),
             2px 0px 38px rgba(0, 0, 0, 0.11);
+
+        z-index: 99999;
     }
 
     &__intro {
@@ -102,12 +103,13 @@
                 background-color: var(--accent-color);
             }
 
+            
+
             &__option {
                 font-size: 8px;
                 font-weight: 700;
                 padding: 10px;
                 color: var(--text-primary-color);
-
 
                 &--delete {
                     color: red;
@@ -115,12 +117,15 @@
                     font-weight: 700;
                     padding: 10px;
                 }
-            }
 
-            &--disabled {
-                color: var(--text-secondary-color);
-                cursor: auto;
-                user-select: none;
+                &--disabled {
+                    color: var(--text-secondary-color) !important;
+                    user-select: none;
+                    font-size: 8px;
+                    font-weight: 700;
+                    padding: 10px;
+                }
+
             }
         }
     }
