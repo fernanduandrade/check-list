@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineAsyncComponent, ref, computed } from 'vue'
+import { defineAsyncComponent, ref, computed, onMounted } from 'vue'
 import FontAwesomeIcon from '@/plugins/fa.config';
 import Divider from '@/components/Divider/Divider.vue'
 import Checkbox from '@/components/Checkbox/Checkbox.vue'
@@ -12,36 +12,68 @@ const todoList = ref<Todo[]>([])
 
 const hideCompletedTodo = ref(false)
 
-const addTodo = () => todoList.value.push({
-  completed: false,
-  id: generateId(),
-  description: '',
-  priority: 'black',
-  title: ``,
-  actionOpened: false,
-  editing: false,
-})
+const addTodo = () => {
+  console.log(todoList.value)
+  todoList.value.push({
+    completed: false,
+    id: generateId(),
+    description: '',
+    priority: 'black',
+    title: ``,
+    actionOpened: false,
+    editing: false,
+  })
 
+  setTodos()
+}
+
+const getTodos = () => {
+  const todos = localStorage.getItem('userTodos')
+  if(todos === null) return [] as Todo[]
+  return JSON.parse(todos)
+}
+const setTodos = () => localStorage.setItem('userTodos', JSON.stringify(todoList.value))
+
+onMounted(() => {
+  const todos = getTodos()
+  todoList.value = todos
+})
 
 const completedTodo = computed(() => todoList.value.filter(todo => todo.completed).length)
 
 const closeActionModalEvent = (event: boolean, todo: Todo) => todo.actionOpened = event
-const changeFlagPriorityEvent = (event: Priority, todo: Todo) => todo.priority = event
-const duplicateTodo = (todo: Todo) => todoList.value.push({ ...todo, actionOpened: false, id: generateId() })
+const changeFlagPriorityEvent = (event: Priority, todo: Todo) => {
+  todo.priority = event
+  todoList.value = todoList.value.map(todo => ({...todo, actionOpened: false}))
+  setTodos()
+}
+const duplicateTodo = (todo: Todo) => {
+  todoList.value.push({ ...todo, actionOpened: false, id: generateId() })
+  todoList.value = todoList.value.map(todo => ({...todo, actionOpened: false}))
+  setTodos()
+}
 
 const deleteTodo = (todo: Todo) => {
   const indexOf = todoList.value.indexOf(todo)
   todoList.value.splice(indexOf, 1)
+  setTodos()
 }
 
 const changeTodoTitle = (todo: Todo) => todo.editing = true
 
 const toggleCompleteTodos = () => hideCompletedTodo.value = !hideCompletedTodo.value
-
+const completeTodo = (event: Event) => {
+  setTodos()
+}
 const filteredTodos = computed(
   () => !hideCompletedTodo.value
     ? todoList.value
     : todoList.value.filter(todo => !todo.completed))
+
+const todoTitleChanged = (todo: Todo) => {
+  todo.editing = false
+  setTodos()
+}
 
 </script>
 
@@ -55,11 +87,11 @@ const filteredTodos = computed(
     <section class="check-list__section">
       <div class="check-list__section task" v-for="(todo, index) in filteredTodos" :key="todo.id">
         <div class="check-list__section task__checkbox">
-          <Checkbox @click="completedTodo = completedTodo += 1" v-model="todo.completed" :priority="todo.priority" />
+          <Checkbox @click="completedTodo = completedTodo += 1" v-model="todo.completed" @change="completeTodo($event)" :priority="todo.priority" />
         </div>
 
         <div v-if="todo.editing" class="check-list__section task__input">
-          <input class="check-list__section task__input--editing" v-if="todo.editing" @keyup.enter="todo.editing = false"
+          <input class="check-list__section task__input--editing" v-if="todo.editing" @keyup.enter="todoTitleChanged(todo)"
             type="text" v-model="todo.title">
         </div>
         <div v-else class="check-list__section task__title">

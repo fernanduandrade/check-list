@@ -10,4 +10,6 @@ export function moveArrayElementIndex<T>(array: Array<T>, index: number, directi
         [array[index], array[index + 1]] = [array[index + 1], array[index]];
       }
     }
+
+    localStorage.setItem('userTodos', JSON.stringify(array))
   }
