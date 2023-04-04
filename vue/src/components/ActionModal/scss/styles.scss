@@ -98,10 +98,7 @@
         &.action {
             padding-top: 15px 0px 15px 0px;
 
-            &:hover {
-                cursor: pointer;
-                background-color: var(--accent-color);
-            }
+            
 
             
 
@@ -110,6 +107,11 @@
                 font-weight: 700;
                 padding: 10px;
                 color: var(--text-primary-color);
+                cursor: pointer;
+                &:hover {
+                    background-color: var(--accent-color);
+                }
+
 
                 &--delete {
                     color: red;
@@ -119,7 +121,7 @@
                 }
 
                 &--disabled {
-                    color: var(--text-secondary-color) !important;
+                    color: var(--text-secondary-color);
                     user-select: none;
                     font-size: 8px;
                     font-weight: 700;
