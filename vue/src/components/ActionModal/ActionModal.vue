@@ -33,7 +33,7 @@ const changeTodoPosition = (position: Direction) => emit('movePosition', positio
         <div class="modal__intro">
             <span :title="todo.title" class="modal__intro__title">Task: {{ todo.title }}</span>
             <div class="modal__intro__icon--close" @click="$emit('closeModal', false)">
-                <font-awesome-icon icon="fa-xmark" />
+                <font-awesome-icon icon="fa-xmark" width="15" height="15"/>
             </div>
         </div>
         <Divider />

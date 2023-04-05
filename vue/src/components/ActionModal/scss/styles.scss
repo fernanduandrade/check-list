@@ -35,22 +35,20 @@
             flex: 0 0 90%;
         }
 
-        &__icon--close {
+        &__icon {
             cursor: pointer;
-            border-radius: 3px;
-            width: 13px;
-            height: 13px;
+            width: 23px;
+            height: 23px;
             
             
             &--close {
+                border-radius: 3px;
+                cursor: pointer;
                 font-weight: 300;
-                
-            }
-            
-
-            &:hover {
-                background-color: var(--accent-color);
-            }
+                &:hover {
+                    background-color: var(--accent-color);
+                }
+            }     
         }
     }
 
@@ -68,19 +66,20 @@
 
         &__icons {
             align-items: center;
-            justify-content: stretch;
+            justify-content: center;
             display: flex;
             padding: 0px 10px 0px 10px;
             flex-direction: row;
-            gap: 32px;
+            gap: 22px;
             height: 40px;
 
             &--icon {
-
                 display: flex;
+                justify-content: center;
                 align-items: center;
-                height: 16px;
-                width: 16px;
+                height: 32px;
+                width: 32px;
+                border-radius: 3px;
 
                 &:hover {
                     cursor: pointer;
@@ -98,10 +97,6 @@
         &.action {
             padding-top: 15px 0px 15px 0px;
 
-            
-
-            
-
             &__option {
                 font-size: 8px;
                 font-weight: 700;
@@ -118,6 +113,10 @@
                     font-size: 8px;
                     font-weight: 700;
                     padding: 10px;
+                    cursor: pointer;
+                    &:hover {
+                        background-color: var(--accent-color);
+                    }
                 }
 
                 &--disabled {
