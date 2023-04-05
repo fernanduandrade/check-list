@@ -80,7 +80,7 @@ const todoTitleChanged = (todo: Todo) => {
 <template>
   <main class="container">
     <header class="check-list__header">
-      <h1>Minha Lista de Tarefas</h1>
+      <h1>Minha Tarefas</h1>
       <ThemeButton />
     </header>
     <divider />
