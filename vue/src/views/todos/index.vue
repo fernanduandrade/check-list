@@ -80,7 +80,7 @@ const todoTitleChanged = (todo: Todo) => {
 <template>
   <main class="container">
     <header class="check-list__header">
-      <h1>Check List - TODO</h1>
+      <h1>Minha Lista de Tarefas</h1>
       <ThemeButton />
     </header>
     <divider />
@@ -96,7 +96,7 @@ const todoTitleChanged = (todo: Todo) => {
         </div>
         <div v-else class="check-list__section task__title">
           <label :class="`check-list__section task__title${(!todo.title ? '--empty' : '')}`"
-            @dblclick="changeTodoTitle(todo)" for="">{{ todo.title ? todo.title : `Título` }}</label>
+            @click="changeTodoTitle(todo)" for="">{{ todo.title ? todo.title : `Título` }}</label>
         </div>
 
         <div class="check-list__section task__actions">
