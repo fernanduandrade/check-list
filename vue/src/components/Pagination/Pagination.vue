@@ -17,6 +17,12 @@ const props = defineProps({
     }
 })
 
+const emit = defineEmits<{
+    (event: 'change-page', value: number): void
+}>()
+
+const eventChangePage = (page: number) => emit('change-page', page)
+
 </script>
 
 <template>
@@ -25,7 +31,7 @@ const props = defineProps({
         <font-awesome-icon icon="fa-angle-left" />
     </span>
       <div v-for="(page, index) in props.totalPage" :key="index" class="page">
-        <span class="page-number">{{ page }}</span>
+        <span class="page-number" @click="eventChangePage(page)">{{ page }}</span>
       </div>
       <span v-if="props.hasNextPage" class="page">
         <font-awesome-icon icon="fa-angle-right" />
