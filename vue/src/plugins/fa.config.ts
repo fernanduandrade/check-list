@@ -19,7 +19,9 @@ import {
     faXmark,
     faFlag,
     faSun,
-    faMoon
+    faMoon,
+    faAngleLeft,
+    faAngleRight
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -41,7 +43,9 @@ library.add(
     faXmark,
     faFlag,
     faSun,
-    faMoon
+    faMoon,
+    faAngleLeft,
+    faAngleRight
 );
 
 

@@ -43,6 +43,7 @@
         padding: 16px 0px;
 
         &.task {
+            word-break: break-word;
             height: 48px;
             display: flex;
             flex-direction: row;
@@ -69,6 +70,10 @@
                 line-height: 23px;
                 width: 580px;
                 color: var(--text-primary-color);
+
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+                white-space: normal;
 
                 &--empty {
                     color: #858585;
@@ -130,4 +135,8 @@
             }
         }
     }
+}
+
+.pagination {
+    align-self: flex-end;
 }

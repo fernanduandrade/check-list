@@ -7,8 +7,11 @@ import ThemeButton from '@/components/ThemeButton/ThemeButton.vue'
 import { Priority, Todo } from '@/common/types';
 import { moveArrayElementIndex, generateId } from '@/common/logic'
 const LoadActionModal = defineAsyncComponent(() => import('@/components/ActionModal/ActionModal.vue'))
+import Pagination from '@/components/Pagination/Pagination.vue'
 
 const todoList = ref<Todo[]>([])
+
+const stateTodo = ref<Todo[]>([])
 
 const hideCompletedTodo = ref(false)
 
@@ -27,29 +30,55 @@ const addTodo = () => {
   setTodos()
 }
 
-const getTodos = () => {
+const getTodos = (): Todo[] => {
   const todos = localStorage.getItem('userTodos')
-  if(todos === null) return [] as Todo[]
+  if (todos === null) return [] as Todo[]
   return JSON.parse(todos)
 }
 const setTodos = () => localStorage.setItem('userTodos', JSON.stringify(todoList.value))
 
+const paginate = <T>(arr: Array<T>, pageNumber: number = 1, pageSize: number = 10) => {
+  const data = arr.slice(pageNumber * pageSize, pageNumber * pageSize + pageSize)
+  const totalPages = Math.round(arr.length / pageSize)
+  return {
+    data,
+    pageNumber,
+    hasPreviousPage: pageNumber > 1,
+    hasNextPage: pageNumber < totalPages,
+    totalPages
+  }
+}
+
+const totalPages = ref<number[]>([])
+const hasNextPage = ref<boolean>(false)
+const hasPreviousPage = ref<boolean>(false)
+
 onMounted(() => {
   const todos = getTodos()
-  todoList.value = todos
+  stateTodo.value = todos
+  const result = paginate(todos, 1)
+  //todoList.value = todos
+  console.log(result)
+  totalPages.value = Array.from({ length: result.totalPages }, (_, index) => index + 1)
+  hasNextPage.value = result.hasNextPage
+  hasPreviousPage.value =  result.hasPreviousPage
 })
+
+const updateList = () => {
+
+}
 
 const completedTodo = computed(() => todoList.value.filter(todo => todo.completed).length)
 
 const closeActionModalEvent = (event: boolean, todo: Todo) => todo.actionOpened = event
 const changeFlagPriorityEvent = (event: Priority, todo: Todo) => {
   todo.priority = event
-  todoList.value = todoList.value.map(todo => ({...todo, actionOpened: false}))
+  todoList.value = todoList.value.map(todo => ({ ...todo, actionOpened: false }))
   setTodos()
 }
 const duplicateTodo = (todo: Todo) => {
   todoList.value.push({ ...todo, actionOpened: false, id: generateId() })
-  todoList.value = todoList.value.map(todo => ({...todo, actionOpened: false}))
+  todoList.value = todoList.value.map(todo => ({ ...todo, actionOpened: false }))
   setTodos()
 }
 
@@ -87,12 +116,13 @@ const todoTitleChanged = (todo: Todo) => {
     <section class="check-list__section">
       <div class="check-list__section task" v-for="(todo, index) in filteredTodos" :key="todo.id">
         <div class="check-list__section task__checkbox">
-          <Checkbox @click="completedTodo = completedTodo += 1" v-model="todo.completed" @change="completeTodo($event)" :priority="todo.priority" />
+          <Checkbox @click="completedTodo = completedTodo += 1" v-model="todo.completed" @change="completeTodo($event)"
+            :priority="todo.priority" />
         </div>
 
         <div v-if="todo.editing" class="check-list__section task__input">
-          <input class="check-list__section task__input--editing" v-if="todo.editing" @keyup.enter="todoTitleChanged(todo)"
-            type="text" v-model="todo.title">
+          <input class="check-list__section task__input--editing" v-if="todo.editing" @mouseleave="todoTitleChanged(todo)"
+            @keyup.enter="todoTitleChanged(todo)" type="text" v-model="todo.title">
         </div>
         <div v-else class="check-list__section task__title">
           <label :class="`check-list__section task__title${(!todo.title ? '--empty' : '')}`"
@@ -121,9 +151,14 @@ const todoTitleChanged = (todo: Todo) => {
             @movePosition="moveArrayElementIndex(todoList, index, $event)" @duplicate="duplicateTodo(todo)"
             @delete="deleteTodo(todo)" v-show="todo.actionOpened" />
         </div>
+
       </div>
 
     </section>
+    <div class="pagination">
+      <Pagination :hasNextPage="hasNextPage" :hasPreviousPage="hasPreviousPage" :totalPage="totalPages" />
+    </div>
+
     <divider />
     <footer class="check-list__footer">
       <div class="check-list__footer visibility" @click="toggleCompleteTodos">
