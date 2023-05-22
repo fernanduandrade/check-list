@@ -48,7 +48,7 @@ const paginate = <T>(
   pageSize: number = 10
 ) => {
   const data = arr.slice((pageNumber - 1) * pageSize, pageNumber * pageSize);
-  const totalPages = Math.round(arr.length / pageSize);
+  const totalPages = Math.ceil(arr.length / pageSize);
   return {
     data,
     pageNumber,
