@@ -14,15 +14,22 @@ const props = defineProps({
   hasNextPage: {
     type: Boolean,
     required: true
+  },
+  currentPage: {
+    type: Number,
+    required: true
   }
 })
 
 const emit = defineEmits<{
-  (event: 'change-page', value: number): void
+  (event: 'change-page', value: number): void,
+  (event: 'update-current-page', value: number): void
 }>()
 
-const eventChangePage = (page: number) => emit('change-page', page)
-
+const eventChangePage = (page: number): void => {
+  emit('change-page', page)
+  emit('update-current-page', page)
+}
 </script>
 
 <template>
@@ -30,7 +37,9 @@ const eventChangePage = (page: number) => emit('change-page', page)
     <span v-if="props.hasPreviousPage" class="page">
       <font-awesome-icon icon="fa-angle-left" />
     </span>
-    <div v-for="(page, index) in props.totalPage" :key="index" class="page" @click="eventChangePage(page)">
+    <div v-for="(page, index) in props.totalPage" :key="index"
+      :class="currentPage === page ? 'active-page' : ''"
+      class="page" @click="eventChangePage(page)">
       <span class="page-number">{{ page }}</span>
     </div>
     <span v-if="props.hasNextPage" class="page">
@@ -45,6 +54,15 @@ const eventChangePage = (page: number) => emit('change-page', page)
   max-width: 200px;
   height: 30px;
   margin: 0 50px 10px 0;
+  gap: 7px;
+}
+
+.active-page {
+  background-color: purple;
+  color: var(--text-primary-color);
+  &:not(.dark-theme) {
+    color: #FFF;
+  }
 }
 
 .page {
@@ -71,4 +89,5 @@ const eventChangePage = (page: number) => emit('change-page', page)
 .page-number {
   font-size: 14px;
 
-}</style>
+}
+</style>

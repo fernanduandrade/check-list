@@ -14,7 +14,7 @@ import Pagination from "@/components/Pagination/Pagination.vue";
 const todoList = ref<Todo[]>([]);
 
 const stateTodo = ref<Todo[]>([]);
-
+const currentPage = ref(1)
 const hideCompletedTodo = ref(false);
 
 const addTodo = () => {
@@ -29,6 +29,7 @@ const addTodo = () => {
   });
 
   setTodos();
+  changePage(currentPage.value);
 };
 
 const getTodos = (): Todo[] => {
@@ -46,10 +47,7 @@ const paginate = <T>(
   pageNumber: number = 1,
   pageSize: number = 10
 ) => {
-  const data = arr.slice(
-    pageNumber * pageSize,
-    pageNumber * pageSize + pageSize
-  );
+  const data = arr.slice((pageNumber - 1) * pageSize, pageNumber * pageSize);
   const totalPages = Math.round(arr.length / pageSize);
   return {
     data,
@@ -80,6 +78,12 @@ onMounted(() => {
 function changePage(evt: number) {
   const result = paginate(stateTodo.value, evt);
   todoList.value = result.data;
+  totalPages.value = Array.from(
+    { length: result.totalPages },
+    (_, index) => index + 1
+  );
+  hasNextPage.value = result.hasNextPage;
+  hasPreviousPage.value = result.hasPreviousPage;
 }
 
 const completedTodo = computed(
@@ -88,6 +92,7 @@ const completedTodo = computed(
 
 const closeActionModalEvent = (event: boolean, todo: Todo) =>
   (todo.actionOpened = event);
+
 const changeFlagPriorityEvent = (event: Priority, todo: Todo) => {
   todo.priority = event;
   todoList.value = todoList.value.map((todo) => ({
@@ -219,9 +224,11 @@ const todoTitleChanged = (todo: Todo) => {
     <div class="pagination">
       <Pagination
         @change-page="changePage($event)"
-        :hasNextPage="hasNextPage"
-        :hasPreviousPage="hasPreviousPage"
-        :totalPage="totalPages"
+        @update-current-page="currentPage = $event"
+        v-model:has-next-page="hasNextPage"
+        v-model:has-previous-page="hasPreviousPage"
+        v-model:total-page="totalPages"
+        v-model:current-page="currentPage"
       />
     </div>
 
