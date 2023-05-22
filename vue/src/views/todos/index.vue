@@ -58,7 +58,7 @@ const paginate = <T>(
   };
 };
 
-const totalPages = ref<number[]>([]);
+const totalPages = ref<number>(0);
 const hasNextPage = ref<boolean>(false);
 const hasPreviousPage = ref<boolean>(false);
 
@@ -67,10 +67,7 @@ onMounted(() => {
   stateTodo.value = todos
   const result = paginate(todos, 1);
   todoList.value = result.data;
-  totalPages.value = Array.from(
-    { length: result.totalPages },
-    (_, index) => index + 1
-  );
+  totalPages.value = result.totalPages
   hasNextPage.value = result.hasNextPage;
   hasPreviousPage.value = result.hasPreviousPage;
 });
@@ -78,10 +75,7 @@ onMounted(() => {
 function changePage(evt: number) {
   const result = paginate(stateTodo.value, evt);
   todoList.value = result.data;
-  totalPages.value = Array.from(
-    { length: result.totalPages },
-    (_, index) => index + 1
-  );
+  totalPages.value = result.totalPages
   hasNextPage.value = result.hasNextPage;
   hasPreviousPage.value = result.hasPreviousPage;
 }

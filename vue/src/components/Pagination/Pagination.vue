@@ -1,10 +1,10 @@
 <script lang="ts" setup>
 import FontAwesomeIcon from '@/plugins/fa.config';
-import { defineProps } from 'vue';
+import { defineProps, computed, ref } from 'vue';
 
 const props = defineProps({
   totalPage: {
-    type: Array<number>,
+    type: Number,
     required: true
   },
   hasPreviousPage: {
@@ -21,6 +21,16 @@ const props = defineProps({
   }
 })
 
+const showPages = ref<number>(4)
+
+const pages = computed(() => {
+  const numShown = Math.min(showPages.value, props.totalPage);
+  let first = props.currentPage - Math.floor(numShown / 2);
+  first = Math.max(first, 1);
+  first = Math.min(first, props.totalPage - numShown + 1);
+  return [...Array(numShown)].map((k,i) => i + first);
+})
+
 const emit = defineEmits<{
   (event: 'change-page', value: number): void,
   (event: 'update-current-page', value: number): void
@@ -34,15 +44,15 @@ const eventChangePage = (page: number): void => {
 
 <template>
   <div class="main">
-    <span v-if="props.hasPreviousPage" class="page">
+    <span v-if="hasPreviousPage" class="page" @click="eventChangePage(currentPage - 1)">
       <font-awesome-icon icon="fa-angle-left" />
     </span>
-    <div v-for="(page, index) in props.totalPage" :key="index"
+    <div v-for="(page, index) in pages" :key="index"
       :class="currentPage === page ? 'active-page' : ''"
       class="page" @click="eventChangePage(page)">
       <span class="page-number">{{ page }}</span>
     </div>
-    <span v-if="props.hasNextPage" class="page">
+    <span v-if="hasNextPage" class="page" @click="eventChangePage(currentPage + 1)">
       <font-awesome-icon icon="fa-angle-right" />
     </span>
   </div>
@@ -70,7 +80,7 @@ const eventChangePage = (page: number): void => {
   height: 35px;
 
   &:hover {
-    background-color: purple;
+    background-color: #edcfed;
   }
 
   display: flex;
