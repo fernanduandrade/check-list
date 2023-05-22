@@ -18,8 +18,7 @@ const stateTodo = ref<Todo[]>([]);
 const hideCompletedTodo = ref(false);
 
 const addTodo = () => {
-  console.log(todoList.value);
-  todoList.value.push({
+  stateTodo.value.push({
     completed: false,
     id: generateId(),
     description: "",
@@ -37,9 +36,11 @@ const getTodos = (): Todo[] => {
   if (todos === null) return [] as Todo[];
   return JSON.parse(todos);
 };
+ 
 const setTodos = () =>
-  localStorage.setItem("userTodos", JSON.stringify(todoList.value));
+  localStorage.setItem("userTodos", JSON.stringify(stateTodo.value));
 
+ 
 const paginate = <T>(
   arr: Array<T>,
   pageNumber: number = 1,
@@ -65,10 +66,9 @@ const hasPreviousPage = ref<boolean>(false);
 
 onMounted(() => {
   const todos = getTodos();
-  stateTodo.value = todos;
+  stateTodo.value = todos
   const result = paginate(todos, 1);
-  todoList.value = todos;
-  console.log(result);
+  todoList.value = result.data;
   totalPages.value = Array.from(
     { length: result.totalPages },
     (_, index) => index + 1
@@ -78,13 +78,9 @@ onMounted(() => {
 });
 
 function changePage(evt: number) {
-  const todos = getTodos();
-  stateTodo.value = todos;
   const result = paginate(stateTodo.value, evt);
   todoList.value = result.data;
 }
-
-const updateList = () => {};
 
 const completedTodo = computed(
   () => todoList.value.filter((todo) => todo.completed).length
