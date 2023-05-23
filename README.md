@@ -1,5 +1,11 @@
 # Check List - Vue 3
 
+Projeto Design Dark Theme
+![image](https://raw.githubusercontent.com/fernanduandrade/check-list/main/vue/src/assets/design_1.png)
+
+Projeto Design Light Theme
+![image](https://raw.githubusercontent.com/fernanduandrade/check-list/main/vue/src/assets/design_2.png)
+
 Este projeto utiliza [Vue Js](https://vuejs.org/).
 
 Este projeto tem como foco criar e gerenciar tarefas diárias
