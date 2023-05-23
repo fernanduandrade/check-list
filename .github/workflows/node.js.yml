@@ -29,10 +29,16 @@ jobs:
         cache: 'npm'
 
     - name: Install project dependecies
-      run: npm ci
+      run: |
+        cd vue
+        npm ci
 
     - name: Run build
-      run: npm run build --if-present
+      run: |
+        cd vue
+        npm run build --if-present
     
     - name: Run tests cases
-      run: npm run unit:test --if-present
+      run: |
+        cd vue
+        npm run unit:test --if-present
