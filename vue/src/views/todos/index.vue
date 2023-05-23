@@ -9,7 +9,7 @@ import { moveArrayElementIndex, generateId } from "@/common/logic";
 const LoadActionModal = defineAsyncComponent(
   () => import("@/components/ActionModal/ActionModal.vue")
 );
-import Pagination from "@/components/Pagination/Pagination.vue";
+const Pagination = defineAsyncComponent(() => import("@/components/Pagination/Pagination.vue"));
 
 const todoList = ref<Todo[]>([]);
 
