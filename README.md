@@ -6,16 +6,13 @@ Este projeto tem como foco criar e gerenciar tarefas diárias
 
 ### Features
 
-- TypeScript Included.
-- Vue Router Included.
-- Vuex.
-- Bootstrap 5.
-- Modules/Components organized across folders.
-- Base pages (like Dashboard/404 etc).
-- Pre-configured with code quality tools: Prettier, TypeScript, Jest, etc.
-- Basic tests included.
-- [Admin Kit](https://github.com/adminkit/adminkit) included.
-- Class based components.
+- TypeScript.
+- SASS.
+- LocalStorage.
+- Dark/Light theme.
+- Vue 3 Composition Api.
+- ViTest.
+- Testes básicos de componentes incluido.
 
 ### Estrutura do diretório
 
