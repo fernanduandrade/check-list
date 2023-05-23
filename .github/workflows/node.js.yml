@@ -26,7 +26,6 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-        working-directory: vue
         cache: 'npm'
 
     - name: Install project dependecies
