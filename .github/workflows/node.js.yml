@@ -30,6 +30,7 @@ jobs:
         cache: 'npm'
 
     - name: Install project dependecies
+      working-directory: vue
       run: npm ci
 
     - name: Run build
