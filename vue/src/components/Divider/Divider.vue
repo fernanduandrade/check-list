@@ -1,5 +1,5 @@
 <template>
-    <hr>
+    <hr role="separator">
 </template>
 <style scoped>
 hr {
