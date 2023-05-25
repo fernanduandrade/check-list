@@ -12,11 +12,13 @@ defaults:
 
 jobs:
   build:
+    
     defaults:
       run:
         working-directory: ./vue
+
     runs-on: ubuntu-latest
-    
+
     strategy:
       matrix:
         node-version: [18.x]
