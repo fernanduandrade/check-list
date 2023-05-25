@@ -28,7 +28,7 @@ jobs:
         cache: 'npm'
         
     - name: Install project dependecies
-      run: npm ci
+      run: npm install
       working-directory: ./vue
 
     - name: Run build
