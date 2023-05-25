@@ -5,5 +5,5 @@
     "moduleResolution": "Node",
     "allowSyntheticDefaultImports": true
   },
-  "includes": ["./src/**/*"]
+  "includes": ["vue/vite.config.ts"]
 }
