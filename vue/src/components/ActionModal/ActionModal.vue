@@ -58,7 +58,7 @@ const changeTodoPosition = (position: Direction) => emit('movePosition', positio
         <section class="modal__section-actions">
             <div class="modal__section-actions action"
                 @click="changeTodoPosition('up')">
-                <span :class="`modal__section-actions action__option${(firstPosition || oneElement ? '--disabled' : '')}`">Mover para cima</span>
+                <move-up :class="`modal__section-actions action__option${(firstPosition || oneElement ? '--disabled' : '')}`">Mover para cima</move-up>
             </div>
             <div class="`modal__section-actions action"
                 @click="changeTodoPosition('down')">
