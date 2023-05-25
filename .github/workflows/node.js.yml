@@ -6,12 +6,14 @@ on:
   pull_request:
     branches: [ "main" ]
 
+defaults:
+  run:
+    working-directory: ./vue
+
 jobs:
   build:
 
     runs-on: ubuntu-latest
-    env: 
-      working-directory: ./vue
       
     strategy:
       matrix:
@@ -28,13 +30,10 @@ jobs:
         cache: 'npm'
         
     - name: Install project dependecies
-      run: npm install
-      working-directory: ./vue
+      run: npm ci
 
     - name: Run build
-      run: npm run build --if-present
-      working-directory: ./vue
+      run: npm run build
     
     - name: Run tests cases
-      run: npm run unit:test --if-present
-      working-directory: ./vue
+      run: npm run unit:test
