@@ -10,8 +10,6 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    env: 
-      working-directory: ./vue
       
     strategy:
       matrix:
@@ -31,16 +29,13 @@ jobs:
       run: |
         cd vue
         npm ci
-      working-directory: ${{ env.working-directory }}
 
     - name: Run build
       run: |
         cd vue
         npm run build --if-present
-        working-directory: ${{ env.working-directory }}
     
     - name: Run tests cases
       run: |
         cd vue
         npm run unit:test --if-present
-      working-directory: ${{ env.working-directory }}
