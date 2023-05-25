@@ -1,0 +1,41 @@
+.main {
+    display: flex;
+    max-width: 200px;
+    height: 30px;
+    margin: 0 50px 10px 0;
+    gap: 7px;
+  }
+  
+  .active-page {
+    background-color: purple;
+    color: var(--text-primary-color);
+    &:not(.dark-theme) {
+      color: #FFF;
+    }
+  }
+  
+  .page {
+    width: 35px;
+    height: 35px;
+  
+    &:hover {
+      background-color: #edcfed;
+    }
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 7px;
+    color: var(--text-primary-color);
+    transition: .2s ease;
+  
+    &:hover {
+      color: #FFF;
+      cursor: pointer;
+    }
+  }
+  
+  .page-number {
+    font-size: 14px;
+  
+  }

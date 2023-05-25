@@ -1,7 +1,6 @@
-import { mount, VueWrapper} from "@vue/test-utils";
+import { mount} from "@vue/test-utils";
 import { expect, it, describe } from "vitest";
 import CheckboxVue from "../Checkbox.vue";
-import { ComponentPublicInstance } from "vue";
 
 describe('Casos de teste para o component checkbox', () => {
     const wrapper = mount(CheckboxVue, ({ props: { 
